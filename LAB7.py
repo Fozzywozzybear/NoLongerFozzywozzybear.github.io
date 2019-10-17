@@ -62,26 +62,17 @@ class OrderedLinkedList:
 
     def add(self, value):
         if isinstance(value,float) or isinstance(value,int):
-            new_node=Node(value)
-            current=self.head
-            while current.next>value:
-                current=current.next
-            current.next=value
-            return None
-
+           new_node=Node(value)
+           current=Node()
+           while current.next!=None
+              new_node.next=current.next
+              current.next=new_node
 
 
     def pop(self):
-        current_index=0
-        current_node=self.head
-        while True: # Runs until a return is hit 
-            last_node=current_node
-            current_node=current_node.next
-            if current_node==None:
-                last_node.next=current_node.next
-                return None
-            current_index+=1
-
+        if self.tail is None:
+            return None
+        self.tail=self.tail.next
 
 
     def remDuplicates(self):
