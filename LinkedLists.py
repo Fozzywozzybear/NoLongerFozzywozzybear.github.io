@@ -58,3 +58,13 @@ my_list.append(4)
 my_list.display()
 my_list.erase(1)
 my_list.display()
+
+
+
+class LinkedList:
+    def __init__(self):
+        self.head=None
+    def add(self,value):
+        new_node=Node(value)
+        new_node.next=self.head
+        self.head=new_node

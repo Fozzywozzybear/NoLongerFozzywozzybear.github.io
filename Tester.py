@@ -63,28 +63,21 @@ class OrderedLinkedList:
     def add(self, value):
         if isinstance(value,float) or isinstance(value,int):
             new_node=Node(value)
-            current=self.head
-            if self.isEmpty():
-                self.head=new_node
-                self.tail=new_node
-                return 
-            else:
-                while current.next!=None:
-                    if new_node.value >= current.value:
-                        current.next=new_node
-                        return
-                current.next=new_node
-            if new_node.value <= self.head.value:
-                        new_node=current
-                        return
-            if current.next.value >= new_node.value:
-                current.next=current
-                new_node.next=current
-                current=new_node
-                return        
-            current.next=new_node
+        if self.head is None:
+            new_node.next=self.head
+            self.head=new_node
             self.tail=new_node
-            return 
+        elif self.head.value >= new_node.value:
+            new_node.next=self.head
+            self.head=new_node
+        else:
+            current=self.head
+            while(current.next != None and current.next.value < new_node.value):
+                current=current.next
+            
+            new_node.next=current.next
+            current.next=new_node
+
     def pop(self):
         current=self.head
         while current!=None:
