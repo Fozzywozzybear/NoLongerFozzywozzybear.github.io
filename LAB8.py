@@ -60,14 +60,22 @@ class Queue:
 
     def enqueue(self, x):
         new_node=Node(x)
-        if self.isEmpty()==False:
+        current=self.head#used as a tracker value 
+        if self.isEmpty():
             self.head=new_node
+            self.tail=new_node
+            self.count+=1
+            return 
         else:
-            self.head.next=new_node
-            self.head=new_node
-        self.count+=1
-        return 
-            
+            while current is not None:#transvers the list
+                if current.next is None: 
+                    current.next=new_node#sets the next value to the new value 
+                    self.tail=new_node#sets the tail value to the new value 
+                    self.count+=1#adds to the counter to list length 
+                    return 
+                current=current.next#if the if is not met then current is moved to the next var 
+                
+        
 
 
 
@@ -80,13 +88,9 @@ class Queue:
             self.head==None
             return value
         else:
-            while self.head != None:
-                if self.head.next==None:
-                    value=self.head.next.value
-                    self.head=self.head.next
-                    self.head.next=None
-                    return value
-                self.head=self.head.next
+            value=self.head.value
+            self.head=self.head.next
+            return  value
 
 
 
@@ -95,4 +99,9 @@ class Queue:
         return self.count 
 
     def reverse(self): 
-        pass
+       if self.head is None or self.head.next is None:
+           return 
+
+
+            
+
