@@ -59,43 +59,54 @@ class OrderedLinkedList:
     def __len__(self):
         return self.count
 
-
     def add(self, value):
         if isinstance(value,float) or isinstance(value,int):
             new_node=Node(value)
-        if self.head is None:
-            new_node.next=self.head
-            self.head=new_node
-            self.tail=new_node
-        elif self.head.value >= new_node.value:
-            new_node.next=self.head
-            self.head=new_node
-        else:
-            current=self.head
-            while(current.next != None and current.next.value < new_node.value):
-                current=current.next
-            
-            new_node.next=current.next
-            current.next=new_node
+            if self.head == None:
+                new_node.next=self.head
+                self.head=new_node
+                self.tail=new_node
+            elif self.head.value >= new_node.value:
+                new_node.next=self.head
+                self.head=new_node
+            else:
+                current=self.head
+                while(current.next != None and current.next.value < new_node.value):
+                    current=current.next   
+                new_node.next=current.next
+                current.next=new_node
+                self.tail=new_node
 
     def pop(self):
         current=self.head
-        while current!=None:
-            if current.next==None:
-                value=current
-                current=None
-                return value.value
-            current=current.next
-            
+        if self.head==None:
+            return 
+        if current.next==None:
+            print(current.value)
+            self.head=None
+            self.tail=None
+            return 
+        prev=current
+        while(prev.next.next):
+            prev=prev.next
+        print(current.next.value)
+        prev.next=None
+        self.tail=prev
+        return 
+
+           
 
 
     def remDuplicates(self):
-        pass
         current=self.head
-        while current.next!=None:
-            if current==current.next:
-                current=None
-
+        while current!=None:
+            if current.value==current.next.value:
+                current.next=current.next.next
+                break
+            current=current.next
+        return 
+            
+            
 
 
 

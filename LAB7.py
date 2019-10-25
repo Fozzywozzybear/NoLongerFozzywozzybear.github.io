@@ -59,50 +59,56 @@ class OrderedLinkedList:
     def __len__(self):
         return self.count
 
-
     def add(self, value):
-        if isinstance(value,float) or isinstance(value,int):
+        if isinstance(value,float) or isinstance(value,int):#checks for float or in
             new_node=Node(value)
-            current=self.head
-            if self.isEmpty():
+            if self.head == None:
+                new_node.next=self.head
                 self.head=new_node
                 self.tail=new_node
-                return 
+            elif self.head.value >= new_node.value:#if the head is > then the new number it puts it in front
+                new_node.next=self.head
+                self.head=new_node
             else:
-                while current.next!=None:
-                    if new_node.value >= current.value:
-                        current.next=new_node
-                        return
+                current=self.head # if the other 2 cases are not met then we go through the list  to place items in the right place
+                while(current.next != None and current.next.value < new_node.value): # checks for end of list and where to put the new number
+                    current=current.next   
+                new_node.next=current.next
                 current.next=new_node
-            if new_node.value <= self.head.value:
-                        new_node=current
-                        return
-            if current.next.value >= new_node.value:
-                current.next=current
-                new_node.next=current
-                current=new_node
-                return        
-            current.next=new_node
-            self.tail=new_node
+                self.tail=new_node
+        else: 
             return 
+
     def pop(self):
         current=self.head
-        while current!=None:
-            if current.next==None:
-                value=current
-                current=None
-                return value.value
-            current=current.next
-            
+        if self.head==None:#if empty does nothing 
+            return 
+        if current.next==None:#if the next value in None set head and tail to none
+            print(current.value)
+            self.head=None
+            self.tail=None
+            return 
+        prev=current
+        while(prev.next.next):#While the next next value of head is real 
+            prev=prev.next
+        print(prev.next.value)# prints the value it is going to remove 
+        prev.next=None#re moves the value
+        self.tail=prev
+        return 
+
+           
 
 
     def remDuplicates(self):
-        pass
         current=self.head
-        while current.next!=None:
-            if current==current.next:
-                current=None
-
+        while current!=None and current.next!=None:#Goes through list till the self.head or self.head.next == None
+            if current.value==current.next.value:#Used to replace the value 
+                current.next=current.next.next
+            else:
+                current=current.next
+        return 
+            
+            
 
 
 

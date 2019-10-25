@@ -2,8 +2,8 @@
 #Due Date: 10/25/2019, 11:59PM 
 ########################################
 #                                      
-# Name:
-# Collaboration Statement:             
+# Name:Aaron Fosmire 
+# Collaboration Statement:    Help from Divyesh Johri         
 #
 ########################################
 
@@ -82,14 +82,16 @@ class Queue:
     def dequeue(self):
         if self.isEmpty():
             return 'Queue is empty'
-        if self.count==1:
+        if self.count==1:#Checks for length 
             value=self.head.value
             self.tail==None
             self.head==None
+            self.count-=1
             return value
-        else:
+        else:#
             value=self.head.value
             self.head=self.head.next
+            self.count-=1
             return  value
 
 
@@ -99,8 +101,16 @@ class Queue:
         return self.count 
 
     def reverse(self): 
-       if self.head is None or self.head.next is None:
-           return 
+        if self.head is None or self.head.next is None:# cant be used if the list is empty or has 1 element 
+            return 
+        lst = []
+        for i in range (self.count):# Calls the dequeue method to add to a fake lst
+           lst.append(self.dequeue())
+        while len(lst) is not 0:# adds the last element of the lst to the linked list 
+            self.enqueue(lst.pop())
+        return 
+
+        
 
 
             
